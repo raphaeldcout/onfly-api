@@ -1,0 +1,440 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Onfly API - Expenses",
+        "description": "API documentation for help testing.",
+        "contact": {
+            "email": "draphael48@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:9001/api",
+            "description": "API Features"
+        }
+    ],
+    "paths": {
+        "/": {},
+        "/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register a new user.",
+                "operationId": "daa91862204df8c9b2e5e8b24aae6618",
+                "requestBody": {
+                    "description": "Input data",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Name to be created",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "email": {
+                                        "description": "Email to be created",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "password": {
+                                        "description": "Password to be created",
+                                        "type": "string",
+                                        "minLength": 6
+                                    },
+                                    "password_confirmation": {
+                                        "description": "Confirm Password to be compared with Password",
+                                        "type": "string",
+                                        "minLength": 6
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Object response `Data` content `User` property"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "422": {
+                        "description": "The given data was invalid"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login a user.",
+                "operationId": "a67f672dd0794a3cefddb0051a2e2f44",
+                "requestBody": {
+                    "description": "Input data",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "device_name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Name created",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "email": {
+                                        "description": "Email created",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "device_name": {
+                                        "description": "Device name origin request",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Object response `Data` content `User` property"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "The given data was invalid"
+                    }
+                }
+            }
+        },
+        "/me": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Display the specified user.",
+                "operationId": "4c4c7bf5b7dc5e997d9fb367439317d2",
+                "responses": {
+                    "200": {
+                        "description": "Object response `Data` content `User` property"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout a user.",
+                "operationId": "6fa87e6ae9c508a3f355b05d51c4b335",
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/expenses": {
+            "get": {
+                "tags": [
+                    "Expenses"
+                ],
+                "summary": "Display a listing of the expenses of the owner.",
+                "operationId": "890baeabae1352f31071a58c129f04cb",
+                "responses": {
+                    "200": {
+                        "description": "Object response `Data` content `Expenses` property"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Expenses"
+                ],
+                "summary": "Store a newly created expense in database.",
+                "operationId": "fb0c3c18515bf5b2d6ad371fa7d734a3",
+                "requestBody": {
+                    "description": "Input data",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "description",
+                                    "date_registration",
+                                    "value"
+                                ],
+                                "properties": {
+                                    "description": {
+                                        "description": "Description to be created",
+                                        "type": "string",
+                                        "maxLength": 191
+                                    },
+                                    "date_registration": {
+                                        "description": "Date registration to be created",
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "description": "Value to be created",
+                                        "type": "number",
+                                        "minLength": 0
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Object response `Data` content `Expenses` property"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "422": {
+                        "description": "The given data was invalid"
+                    }
+                }
+            }
+        },
+        "/expenses/{id}": {
+            "get": {
+                "tags": [
+                    "Expenses"
+                ],
+                "summary": "Display the specified expense.",
+                "operationId": "48298c454d6fed9a4cb4c92661eb354e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Object response `Data` content `Expenses` property"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Expenses"
+                ],
+                "summary": "Remove the specified expense in the database.",
+                "operationId": "2087e0750118d8fc4784f0687a4729f4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Expenses"
+                ],
+                "summary": "Update the specified expense in the database.",
+                "operationId": "f3916f54d16624439ceb9b9ae72f6d30",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Input data",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "description",
+                                    "date_registration",
+                                    "value"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "Id of the expense created",
+                                        "type": "number"
+                                    },
+                                    "description": {
+                                        "description": "Description created",
+                                        "type": "string",
+                                        "maxLength": 191
+                                    },
+                                    "date_registration": {
+                                        "description": "Date registration created",
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "description": "Value created",
+                                        "type": "number",
+                                        "minLength": 0
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Object response `Data` content `Expenses` property"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "The given data was invalid"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Expenses": {
+                "description": "Expenses model",
+                "properties": {
+                    "id": {
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "description": {
+                        "description": "Description",
+                        "type": "string"
+                    },
+                    "date_registration": {
+                        "description": "Date registration",
+                        "type": "string"
+                    },
+                    "user_id": {
+                        "description": "ID User",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "Value",
+                        "type": "number"
+                    },
+                    "created_at": {
+                        "description": "Created timestamp",
+                        "type": "string"
+                    },
+                    "updated_at": {
+                        "description": "Updated timestamp",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "description": "User model",
+                "properties": {
+                    "id": {
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Name",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Email",
+                        "type": "string"
+                    },
+                    "email_verified_at": {
+                        "description": "Account verified timestamp",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "created_at": {
+                        "description": "Created timestamp",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "updated_at": {
+                        "description": "Updated timestamp",
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Authorization API"
+        },
+        {
+            "name": "Expenses",
+            "description": "Expenses API"
+        }
+    ]
+}
